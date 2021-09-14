@@ -25,7 +25,7 @@ public class LanceDao {
 	}
 
 	public Lance buscarMaiorLanceDoLeilao(Leilao leilao) {
-		return em.createQuery("SELECT l FROM Lance l WHERE l.valor = (SELECT MAX(lance.valor) FROM Lance lance)", Lance.class)
+		return em.createQuery("SELECT l FROM Lance l WHERE l.valor = (SELECT MAX(lance.valor) FROM Lance lance WHERE lance.leilao = :leilao)", Lance.class)
 				.setParameter("leilao", leilao)
 				.getSingleResult();
 	}
